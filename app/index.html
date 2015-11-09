@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>material-learn</title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <style>
+        .label-icon {
+            color: palevioletred;
+            /* Orange 500 */
+        }
+
+    </style>
+
+
+
+</head>
+
+<body ng-app="myApp" layout="row" ng-controller="SimpleFormController">
+
+    <div flex layout="column" role="main">
+        <md-toolbar class="md-toolbar-tools">
+            <h1>Register form</h1>
+        </md-toolbar>
+
+
+
+        <md-content layout-padding>
+            <form name="projectForm">
+                <md-input-container class="md-block">
+                    <label>Имя и Фамилия</label>
+                    <input md-maxlength="50" required name="name" ng-model="user.name">
+                    <div ng-messages="projectForm.name.$error" ng-show="projectForm.name.$dirty">
+                        <div ng-message="required">Обязательно</div>
+                        <div ng-message="md-maxlength">Слишком длинное имя</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Email</label>
+                    <input required type="email" name="email" ng-model="user.email" minlength="5" md-maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+                    <div ng-messages="projectForm.email.$error" role="alert" ng-show="projectForm.email.$dirty">
+                        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                            Введите правильный email
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Пароль</label>
+                    <input required type="password" name="password" ng-model="user.password" minlength="8" md-maxlength="32" />
+                    <div ng-messages="projectForm.password.$error" role="alert" ng-show="projectForm.password.$dirty">
+                        <div ng-message-exp="['required', 'minlength', 'maxlength']">
+                            Пароль должен состоять минимум из 8 символов
+                        </div>
+                        <div ng-message="md-maxlength">Пароль слишком длинный</div>
+                    </div>
+                </md-input-container>
+
+                <md-button class="md-raised md-primary" ng-click="register(user)" ng-disabled="projectForm.$invalid">
+                    Зарегистрироваться
+                </md-button>
+
+            </form>
+            <md-divider></md-divider>
+
+            <div layout-margin layout-padding>
+                <code>
+                        {{registeredUser | json}}
+              </code>
+            </div>
+
+        </md-content>
+
+
+    </div>
+
+
+
+
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-material/angular-material.js"></script>
+    <script src="/bower_components/angular-messages/angular-messages.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js scripts/main.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/input.js"></script>
+    <!-- endbuild -->
+
+
+</body>
+
+</html>
